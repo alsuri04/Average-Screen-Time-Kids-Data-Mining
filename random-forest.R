@@ -18,7 +18,7 @@ library(randomForest)
 
 regressor = randomForest(formula =  Performance.Index ~.,
                          data = training_set,
-                         ntree = 100)
+                         ntree = 500)
 
 # Making a prediction
 y_pred <-predict(regressor,newdata=test_set)
