@@ -42,10 +42,11 @@ y_test_scaled = sc_Y.transform(y_test.reshape(len(y_test), 1)).flatten()
 
 # Backward Elimination
 X_train_scaled = sm.add_constant(X_train_scaled).astype(np.float64)
-X_opt = X_train_scaled[:, [0, 1, 2, 3, 4]]
+X_opt = X_train_scaled[:, [0, 1, 2, 3, 4, 5]]
 regressor_opt = sm.OLS(endog=y_train_scaled, exog=X_opt).fit()
 regressor_opt.summary()
 
+X_test_scaled = sm.add_constant(X_test_scaled).astype(np.float64)
 
 y_pred=regressor_opt.predict(X_test_scaled)
 y_pred_unscaled = sc_Y.inverse_transform(y_pred.reshape(-1, 1)).flatten()
@@ -57,14 +58,14 @@ y_pred_unscaled = sc_Y.inverse_transform(y_pred.reshape(-1, 1)).flatten()
 from sklearn.metrics import r2_score
 r2 = r2_score(y_test_scaled, y_pred)
 print(r2)
-r2_adjusted = 1 - (1 - r2) * (len(y_test_scaled) - 1) / (len(y_test_scaled) - 6 - 1)
+r2_adjusted = 1 - (1 - r2) * (len(y_test_scaled) - 1) / (len(y_test_scaled) - 5 - 1)
 print('adjusted ', r2_adjusted)
 
 X_past_score=X_test[:,2]
 plt.scatter(X_past_score, y_test,color = 'red')
 plt.scatter(X_test[:, 2], y_pred_unscaled, color='blue', marker='x', label='Predicted')
 
-plt.title('SVR Regression')
+plt.title('Multiple Linear Regression')
 plt.xlabel('Past Test Scores')
 plt.ylabel('Current Performance Index')
 plt.show()
