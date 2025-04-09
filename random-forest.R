@@ -28,7 +28,7 @@ ssr = sum((test_set$Performance.Index - y_pred) ^ 2)
 sst = sum((test_set$Performance.Index - mean(test_set$Performance.Index)) ^ 2)
 r2 = 1 - (ssr/sst)
 print(r2)
-r2_adjusted = 1 - (1 - r2) * (length(test_set$Performance.Index) - 1) / (length(test_set$Performance.Index) - 6 - 1)
+r2_adjusted = 1 - (1 - r2) * (length(test_set$Performance.Index) - 1) / (length(test_set$Performance.Index) - 5 - 1)
 print(paste('adjusted rf', r2_adjusted))
 
 # Visualizing the Random Forest Regression results

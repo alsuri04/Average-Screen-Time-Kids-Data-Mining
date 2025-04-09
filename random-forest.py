@@ -47,7 +47,7 @@ y_pred_rf=regressor.predict(X_test_raw)
 from sklearn.metrics import r2_score
 r2 = r2_score(Y_test_raw, y_pred_rf)
 print(r2)
-r2_adjusted = 1 - (1 - r2) * (len(Y_test_raw) - 1) / (len(Y_test_raw) - 6 - 1)
+r2_adjusted = 1 - (1 - r2) * (len(Y_test_raw) - 1) / (len(Y_test_raw) - 5 - 1)
 print('adjusted ', r2_adjusted)
 
 
