@@ -17,7 +17,7 @@ regressor_opt<-lm(formula= Performance.Index~ Hours.Studied +Previous.Scores +Ex
                   data = training_set)
 summary(regressor_opt)
 
-y_pred <-predict(regressor,newdata=test_set)
+y_pred <-predict(regressor_opt,newdata=test_set)
 
 ssr = sum((test_set$Performance.Index - y_pred) ^ 2)
 sst = sum((test_set$Performance.Index - mean(test_set$Performance.Index)) ^ 2)
@@ -30,7 +30,7 @@ x_range <- range(dataset$Previous.Scores)
 y_range <- range(dataset$Performance.Index)
 print(ggplot() +
         geom_point(aes(x = test_set$Previous.Scores, y = test_set$Performance.Index), colour = 'red') +
-        geom_point(aes(x = test_set$Previous.Scores, y = predict(regressor, newdata = test_set)), colour = 'blue') +
+        geom_point(aes(x = test_set$Previous.Scores, y = predict(regressor_opt, newdata = test_set)), colour = 'blue') +
         ggtitle('Previous score vs Current Performance Index ') +
         xlab('Previous Score') + ylab('Current Performance Index') +
-        xlim(x_range) + ylim(y_range))    
+        xlim(x_range) + ylim(y_range))   
